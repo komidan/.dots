@@ -1,0 +1,66 @@
+[use-grammars]
+only = [
+  # Languages
+  "c",
+  "cpp",
+  "cmake",
+  "make",
+  "python",
+  "lua",
+  "css",
+
+  # Data Files
+  "toml",
+  "yaml",
+  "ini",
+  "json",
+  "jsonc",
+  "csv",
+
+  # General
+  "bash",
+  "regex",
+  "sql",
+  "markdown",
+]
+
+[[language]]
+name = "c"
+indent = { unit = "    ", tab-width = 4 }
+file-types = [ "c", "h" ]
+rulers = [ 81 ]
+text-width = 80
+
+[[language]]
+name = "cpp"
+indent = { unit = "    ", tab-width = 4 }
+rulers = [ 81 ]
+text-width = 80
+
+[[language]]
+name = "css"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "lua"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "toml"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "bash"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "json"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "ini"
+indent = { unit = "  ", tab-width = 2 }
+
+[[language]]
+name = "git-commit"
+rulers = [ 72 ]

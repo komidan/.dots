@@ -1,0 +1,110 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# General Customization
+add_newline = false
+palette = "gruvbox"
+format = """\
+$username\
+$directory\
+$python\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status
+$sudo\
+$character"""
+
+# Modules
+[hostname]
+format = '[$hostname]($style) '
+ssh_only = false
+style = 'green'
+
+[username]
+show_always = true
+format = '[$user]($style) '
+style_user = 'aqua1'
+
+[sudo]
+format = '[+]($style) '
+style = 'yellow0'
+disabled = false
+
+[directory]
+format = '[$path](fg:purple0)[$readonly](fg:red0) '
+truncation_length = 2
+truncation_symbol = './'
+home_symbol = '~'
+
+[python]
+format = '[\(](fg:bg4)[$version](fg:aqua1)[\)](fg:bg4)[$virtualenv](fg:fg4) '
+
+[git_branch]
+format = '[\(](fg:bg4)[$branch](fg:blue1)[\)](fg:bg4) '
+
+[git_commit]
+format = '[\(](fg:bg4)[$hash](fg:green1 italic)[\)](fg:bg4) '
+tag_disabled = true
+
+[git_state]
+format = '[\(](fg:bg4)[$state]($style)[\)](fg:bg4) '
+style = "italic yellow1"
+rebase = "rebasing"
+merge = "merging"
+revert = "reverting"
+cherry_pick = "cherry-picking"
+bisect = "bisecting"
+am = "am"
+am_or_rebase = "am/rebase"
+
+[git_status]
+format = '([\($all_status$ahead_behind\)](fg:bg4))'
+up_to_date = '[\$](fg:green1)'
+conflicted = '[!](fg:red1)'
+ahead = '[a](fg:fg1)'
+behind = '[b](fg:fg1)'
+diverged = '[d](fg:blue1)'
+untracked = '[u](fg:fg1)'
+stashed = '[s](fg:aqua1)'
+modified = '[m](fg:fg1)'
+staged = '[f](fg:green1)'
+renamed = '[r](fg:yellow1)'
+deleted = '[f](fg:red1)'
+
+[status]
+disabled = false
+format = '[$status]($style) '
+success_style = 'green1'
+failure_style = 'red1'
+
+[character]
+success_symbol = '[›](fg:fg0)'
+error_symbol = '[](fg:red1)'
+
+# Colorscheme
+[palettes.gruvbox]
+bg_dim  = "#282828"
+bg0     = "#32302f"
+bg1     = "#3c3836"
+bg2     = "#504945"
+bg3     = "#665c54"
+bg4     = "#7c6f64"
+fg0     = "#fbf1c7"
+fg1     = "#ebdbb2"
+fg2     = "#d5c4a1"
+fg3     = "#bdae93"
+fg4     = "#a89984"
+red0    = "#cc241d"
+red1    = "#fb4934"
+green0  = "#98971a"
+green1  = "#b8bb26"
+yellow0 = "#d79921"
+yellow1 = "#fabd2f"
+blue0   = "#458588"
+blue1   = "#83a598"
+purple0 = "#b16286"
+purple1 = "#d3869b"
+aqua0   = "#689d6a"
+aqua1   = "#8ec07c"
+orange0 = "#d65d0e"
+orange1 = "#fe8019"

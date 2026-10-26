@@ -1,0 +1,269 @@
+#!/usr/bin/env bash
+
+set -Eeuo pipefail
+
+PROGRAM="${0##*/}"
+DOTSDIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+CONFDIR="$DOTSDIR/config"
+
+VERBOSE=0
+ADOPT=0
+NOCHANGE=0
+
+usage() {
+  cat <<EOF
+Usage:
+  $PROGRAM [OPTIONS]... <command> [ARGS...]
+
+Options:
+  -v, --verbose
+    Prints extra information during command execution.
+
+  -a, --adopt
+    When running 'stow' command, adopt packages (must provide packages to stow).
+
+  -n, --no-change
+    Runs stow under the -n (--simulate) flag, disabling file system changes.
+
+Commands:
+  font <url>
+    Installs a font from the a provided url (uses curl).
+
+  stow [packages,...]
+    Uses GNU Stow to symlink all the configurations into their .config
+    equivalent paths.
+
+    If you provide no options, it will stow everything. Providing a
+    comma-separated (no spaces) list afterwards will optionally stow specific
+    folders.
+
+  help (-h, --help)
+    Displays this help usage message.
+
+Examples:
+  $PROGRAM font https://github.com/ryanoasis/nerd-fonts/releases/download/v3.5.1/Iosevka.zip
+  $PROGRAM stow
+  $PROGRAM stow zsh,helix,wezterm
+  $PROGRAM -v -n -a stow wezterm,helix
+EOF
+}
+
+end() {
+  printf '[%s] Error: %s\n' "$PROGRAM" "$*" >&2
+  exit 1
+}
+
+log() {
+  printf '[%s] %s\n' "$PROGRAM" "$*" >&2
+}
+
+logv() {
+  if (( VERBOSE )); then
+    log "$@"
+  fi
+}
+
+require_cmd() {
+  if ! command -v "$1" >/dev/null 2>&1; then
+    end "Command $1 is missing, install and try again."
+  fi
+}
+
+cmd_stow() {
+  require_cmd stow
+
+  local package="${1:-}"
+  local -a stowargs=(-d "$CONFDIR" -t "$HOME")
+
+  if (( VERBOSE )); then
+    stowargs+=(-v2)
+  else
+    stowargs+=(-v)
+  fi
+  (( ADOPT )) && stowargs+=(--adopt)
+  (( NOCHANGE )) && stowargs+=(--simulate)
+
+  logv "STOWARGS: ${stowargs[@]}"
+
+  if [[ -z "$package" ]]; then
+    # No arguments were passed:
+    local -a targets=()
+    local dir
+
+    for dir in "$CONFDIR"/*/; do
+      [[ -d "$dir" ]] || continue
+      targets+=("${dir%/}")
+    done
+
+    stow "${stowargs[@]}" "${targets[@]##*/}"
+  else
+    # User provided arguments:
+    local -a targets
+    IFS="," read -r -a targets <<< "$package"
+    stow "${stowargs[@]}" "${targets[@]}"
+  fi
+}
+
+extract() {
+    local archive="$1" dest="$2"
+    case "$archive" in
+        *.tar.gz|*.tgz)
+          require_cmd tar
+          tar -xzf "$archive" -C "$dest"
+          ;;
+        *.tar.bz2)
+          require_cmd tar
+          tar -xjf "$archive" -C "$dest"
+          ;;
+        *.tar.xz)
+          require_cmd tar
+          tar -xJf "$archive" -C "$dest"
+          ;;
+        *.zip)
+          require_cmd unzip
+          unzip -q "$archive" -d "$dest"
+          ;;
+        *.7z)
+          require_cmd 7z
+          7z x "$archive" -o"$dest" >/dev/null
+          ;;
+        *) echo "[$0] unsupported format: $(basename "$archive")"; return 1;
+    esac
+}
+
+cmd_font() {
+  (( $# == 1 )) || end "Usage: $PROGRAM font <url>"
+  require_cmd curl
+
+  [[ "$1" == https://* ]] || end "Font url must use HTTPS"
+
+  local tmp=$(mktemp -d) || end "Failed to create temp dir"
+  local fname="$(basename "$1")"
+  local fpath="$HOME/.local/share/fonts"
+
+  mkdir -p "$fpath"
+  logv "Fonts path: $fpath"
+
+  case "$fname" in
+    *.tar.gz|*.tgz|*.tar.gz2|*.tar.bz2|*.tar.xz|*.zip|*.7z) ;;
+    *) end "Unknown file format" ;;
+  esac
+
+  mkdir -p "$tmp"
+  logv "Made temporary dir $tmp"
+
+  if ! curl -fsSL "$1" -o "$tmp/$fname"; then
+    end "Failed to download from '$1'"
+  else
+    log "Downloaded archive to $tmp"
+  fi
+
+  if ! extract "$tmp/$fname" "$tmp"; then
+    end "Failed to extract '$fname'"
+  else
+    log "Extracted archive to $tmp"
+  fi
+
+  local fonts
+  fonts=$(find "$tmp" -type f \( -name "*.ttf" -o -name "*.otf" \))
+
+  if [[ -z "$fonts" ]]; then
+    end "No font files found (.ttf/.otf)"
+  else
+    logv "Font List: $(printf '\n%s'\n "$fonts" | sed 's/^/    /')"
+  fi
+
+  local font c=0 dest
+  while IFS= read -r -d '' font; do
+    dest="$fpath/${font##*/}"
+
+    if [[ -e "$dest" ]]; then
+      log "Skipping existing font: ${font##*/}"
+      continue
+    fi
+
+    if cp -n -- "$font" "$dest"; then
+      logv "Copied $font to $dest"
+      ((c += 1))
+    fi
+  done < <(find "$tmp" -type f \( -name "*.ttf" -o -name "*.otf" \) -print0)
+
+  if rm -rf "$tmp"; then
+    log "Installed "$c" fonts"
+  else
+    logv "Deleting $tmp"
+  fi
+
+  if (( c > 0 )); then
+    fc-cache -r
+    log "Refreshed font cache"
+  fi
+}
+
+main() {
+  while (( $# > 0 )); do
+    case "$1" in
+      -v|--verbose)
+        VERBOSE=1
+        shift
+        ;;
+
+      -a|--adopt)
+        ADOPT=1
+        shift
+        ;;
+
+      -n|--no-change)
+        NOCHANGE=1
+        shift
+        ;;
+
+      -h|--help)
+        usage
+        return 0
+        ;;
+
+      --)
+        shift
+        break
+        ;;
+
+      -*)
+        printf 'Unknown option: %s\n' "$1" >&2
+        return 2
+        ;;
+
+      *)
+        break
+        ;;
+    esac
+  done
+
+  (( $# > 0 )) || {
+    usage
+    return 1
+  }
+
+  local command="$1"
+  shift
+
+  case "$command" in
+    stow)
+      cmd_stow "$@"
+      ;;
+
+    font)
+      cmd_font "$@"
+      ;;
+
+    help)
+      usage
+      ;;
+
+    *)
+      usage
+      ;;
+  esac
+}
+
+main "$@"

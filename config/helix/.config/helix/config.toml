@@ -1,0 +1,103 @@
+theme = "maya"
+
+[editor]
+scrolloff = 4
+mouse = true
+scroll-lines = 8
+line-number = "relative"
+
+default-yank-register = "+"
+middle-click-paste = false
+
+shell = ["sh", "-c"]
+
+cursorline = false
+cursorcolumn = false
+
+continue-comments = false
+gutters = ["diff", "diagnostics", "spacer", "line-numbers", "spacer"]
+auto-format = false
+indent-heuristic = "tree-sitter"
+idle-timeout = 200
+
+auto-completion = false
+path-completion = true
+completion-timeout = 250
+preview-completion-insert = true
+completion-trigger-len = 2
+completion-replace = false
+
+end-of-line-diagnostics = "disable"
+
+auto-info = true
+true-color = true
+bufferline = "multiple"
+color-modes = true
+clipboard-provider = "wayland"
+insert-final-newline = false
+trim-trailing-whitespace = true
+popup-border = "all"
+editor-config = true
+
+[editor.inline-diagnostics]
+cursor-line = "warning"
+other-lines = "disable"
+
+[editor.file-picker]
+hidden = false
+git-ignore = true
+ignore = true
+max-depth = 8 # optimize?
+
+[editor.smart-tab]
+enable = false
+supersede-menu = false
+
+[editor.cursor-shape]
+insert = "bar"
+select = "bar"
+normal = "block"
+
+[editor.statusline]
+separator = "/"
+left = ["mode", "spinner", "register", "read-only-indicator", "diagnostics"]
+center = ["selections", "separator", "position", "position-percentage", "spacer", "separator", "total-line-numbers"]
+right = ["version-control", "workspace-diagnostics", "file-type", "file-encoding"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+diagnostics = ["warning", "error"]
+
+[editor.whitespace.render]
+space = "all"
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[editor.indent-guides]
+render = true
+character = "|" #│
+skip-levels = 1
+
+[editor.soft-wrap]
+enable = true
+wrap-at-text-width = true
+
+[editor.lsp]
+auto-signature-help = false
+
+### KEYBINDINGS
+[keys.normal]
+C-d = ["page_cursor_half_down", "align_view_center"]
+C-u = ["page_cursor_half_up", "align_view_center"]
+g = { "U" = "switch_to_uppercase", "u" = "switch_to_lowercase" }
+
+[keys.select]
+C-d = ["page_cursor_half_down", "align_view_center"]
+C-u = ["page_cursor_half_up", "align_view_center"]
+g = { "U" = "switch_to_uppercase", "u" = "switch_to_lowercase" }
+
+[keys.insert]
+C-k = "signature_help"
+C-n = "completion"

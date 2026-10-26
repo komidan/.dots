@@ -1,0 +1,45 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "debugger": {
+    "save_breakpoints": false,
+    "stepping_granularity": "line",
+    "dock": "right"
+  },
+  "cursor_shape": "underline",
+  "inlay_hints": {
+    "show_other_hints": false,
+    "show_parameter_hints": false,
+    "show_type_hints": false,
+    "show_value_hints": false
+  },
+  "lsp_document_colors": "border",
+  "show_completions_on_input": false,
+  "show_whitespaces": "all",
+  "buffer_font_family": "Iosevka Nerd Font",
+  "terminal": {
+    "font_family": "Iosevka Nerd Font"
+  },
+  "helix_mode": true,
+  "icon_theme": {
+    "mode": "dark",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 14.0,
+  "theme": {
+    "mode": "dark",
+    "light": "Gruvbox Light",
+    "dark": "Gruvbox Dark Soft",
+  },
+  "experimental.theme_overrides": {
+    "editor.invisible": "#504945"
+  }
+}

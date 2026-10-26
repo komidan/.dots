@@ -1,0 +1,20 @@
+[init]
+	branch = master
+	defaultBranch = master
+[core]
+	pager = delta
+[merge]
+	style = zdiff3
+[diff]
+	algorithm = histogram
+[help]
+	autocorrect = prompt
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+	dark = true
+	syntax-theme = gruvbox-dark
+	line-numbers = true
+[include]
+	path = ~/.gitconfig-personal

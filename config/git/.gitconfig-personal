@@ -1,0 +1,7 @@
+[user]
+	name = komidan
+	email = komidan.gg@gmail.com
+[core]
+	editor = helix
+[github]
+	user = komidan
