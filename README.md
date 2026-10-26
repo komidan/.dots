@@ -8,7 +8,8 @@ For this script to work you need [stow](https://www.gnu.org/software/stow/). For
 
 ### Installation
 
-> NOTE: dotsctl is a bash script, make sure to chmod it or just run it manually.
+> #### NOTE
+> Dotsctl is a bash script, make sure to chmod it or just run it manually.
 > - `chmod +x dotsctl` then `./dotsctl`
 > - `bash dotsctl`
 
