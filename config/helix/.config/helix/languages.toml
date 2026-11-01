@@ -26,7 +26,7 @@ only = [
 
 [[language]]
 name = "c"
-indent = { unit = "    ", tab-width = 4 }
+indent = { unit = "    ", tab-width = 2 }
 file-types = [ "c", "h" ]
 rulers = [ 81 ]
 text-width = 80

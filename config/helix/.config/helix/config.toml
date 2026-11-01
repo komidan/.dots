@@ -5,30 +5,22 @@ scrolloff = 4
 mouse = true
 scroll-lines = 8
 line-number = "relative"
-
 default-yank-register = "+"
 middle-click-paste = false
-
-shell = ["sh", "-c"]
-
 cursorline = false
 cursorcolumn = false
-
 continue-comments = false
 gutters = ["diff", "diagnostics", "spacer", "line-numbers", "spacer"]
 auto-format = false
 indent-heuristic = "tree-sitter"
 idle-timeout = 200
-
 auto-completion = false
 path-completion = true
 completion-timeout = 250
 preview-completion-insert = true
 completion-trigger-len = 2
 completion-replace = false
-
 end-of-line-diagnostics = "disable"
-
 auto-info = true
 true-color = true
 bufferline = "multiple"
@@ -54,7 +46,7 @@ enable = false
 supersede-menu = false
 
 [editor.cursor-shape]
-insert = "bar"
+insert = "underline"
 select = "bar"
 normal = "block"
 
@@ -75,6 +67,10 @@ nbsp = "all"
 nnbsp = "all"
 newline = "none"
 
+[editor.whitespace.characters]
+tab = "≻"
+tabpad = "-"
+
 [editor.indent-guides]
 render = true
 character = "|" #│
@@ -87,7 +83,6 @@ wrap-at-text-width = true
 [editor.lsp]
 auto-signature-help = false
 
-### KEYBINDINGS
 [keys.normal]
 C-d = ["page_cursor_half_down", "align_view_center"]
 C-u = ["page_cursor_half_up", "align_view_center"]
