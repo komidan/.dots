@@ -4,7 +4,6 @@
 add_newline = false
 palette = "gruvbox"
 format = """\
-$username\
 $directory\
 $python\
 $git_branch\
@@ -15,25 +14,10 @@ $sudo\
 $character"""
 
 # Modules
-[hostname]
-format = '[$hostname]($style) '
-ssh_only = false
-style = 'green'
-
-[username]
-show_always = true
-format = '[$user]($style) '
-style_user = 'aqua1'
-
-[sudo]
-format = '[+]($style) '
-style = 'yellow0'
-disabled = false
-
 [directory]
-format = '[$path](fg:purple0)[$readonly](fg:red0) '
-truncation_length = 2
-truncation_symbol = './'
+format = '[$path](fg:purple1)[$readonly](fg:red0) '
+truncation_length = 3
+truncation_symbol = '… /'
 home_symbol = '~'
 
 [python]
@@ -71,15 +55,14 @@ staged = '[f](fg:green1)'
 renamed = '[r](fg:yellow1)'
 deleted = '[f](fg:red1)'
 
-[status]
+[sudo]
 disabled = false
-format = '[$status]($style) '
-success_style = 'green1'
-failure_style = 'red1'
+format = '[+]($style) '
+style = 'yellow0'
 
 [character]
 success_symbol = '[›](fg:fg0)'
-error_symbol = '[](fg:red1)'
+error_symbol = '[•](fg:red1)'
 
 # Colorscheme
 [palettes.gruvbox]
