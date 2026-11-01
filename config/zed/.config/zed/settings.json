@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "disable_ai": true,
+  "relative_line_numbers": "enabled",
+  "soft_wrap_indent": "extra_one",
+  "cli_default_open_behavior": "existing_window",
+  "soft_wrap": "bounded",
+  "show_wrap_guides": true,
   "debugger": {
     "save_breakpoints": false,
     "stepping_granularity": "line",
