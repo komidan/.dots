@@ -52,8 +52,8 @@ untracked = '[u](fg:fg1)'
 stashed = '[s](fg:aqua1)'
 modified = '[m](fg:fg1)'
 staged = '[f](fg:green1)'
-renamed = '[r](fg:yellow1)'
 deleted = '[f](fg:red1)'
+renamed = '[r](fg:yellow1)'
 
 [sudo]
 disabled = false

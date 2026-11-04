@@ -1,4 +1,7 @@
-inherits = "gruvbox_dark_soft"
+inherits = "gruvbox"
 
-"comment" = { fg = "bg4" }
+"comment" = { fg = "bg4", modifiers = ["italic"] }
 "variable.parameter" = { fg = "blue1" }
+
+[palette]
+bg0 = "#32302f"

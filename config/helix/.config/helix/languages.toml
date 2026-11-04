@@ -1,6 +1,6 @@
 [use-grammars]
 only = [
-  # Languages
+  # Programming Languages
   "c",
   "cpp",
   "cmake",
@@ -24,43 +24,29 @@ only = [
   "markdown",
 ]
 
+# Programming Languages
 [[language]]
 name = "c"
-indent = { unit = "    ", tab-width = 2 }
-file-types = [ "c", "h" ]
+indent = { unit = "  ", tab-width = 2 }
+file-types = [ "c", "h", "sma", "inc" ]
 rulers = [ 81 ]
 text-width = 80
 
 [[language]]
 name = "cpp"
-indent = { unit = "    ", tab-width = 4 }
+indent = { unit = "  ", tab-width = 2 }
 rulers = [ 81 ]
 text-width = 80
 
 [[language]]
-name = "css"
+name = "python"
 indent = { unit = "  ", tab-width = 2 }
+file-types = [ "py" ]
 
-[[language]]
-name = "lua"
-indent = { unit = "  ", tab-width = 2 }
+# Data Languages
 
-[[language]]
-name = "toml"
-indent = { unit = "  ", tab-width = 2 }
-
-[[language]]
-name = "bash"
-indent = { unit = "  ", tab-width = 2 }
-
-[[language]]
-name = "json"
-indent = { unit = "  ", tab-width = 2 }
-
-[[language]]
-name = "ini"
-indent = { unit = "  ", tab-width = 2 }
+# General
 
 [[language]]
 name = "git-commit"
-rulers = [ 72 ]
+rulers = [ 50, 72 ]
