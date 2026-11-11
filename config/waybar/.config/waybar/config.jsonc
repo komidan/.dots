@@ -1,0 +1,137 @@
+[
+  {
+    "height": 32,
+    "spacing": 2,
+    "modules-left": [
+      "sway/workspaces",
+      "sway/scratchpad"
+    ],
+    "modules-center": [
+      "clock"
+    ],
+    "modules-right": [
+      "privacy",
+      "battery",
+      "pulseaudio",
+      "bluetooth",
+      "network"
+    ],
+    "sway/workspaces": {
+      "disable-scroll": true,
+      "format": "{icon}",
+    },
+    "battery": {
+      "interval": 30,
+      "states": {
+        "warning": 50,
+        "critical": 25
+      },
+      "format": "{icon}",
+      "format-charging": "{icon}",
+      "format-icons": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "tooltip-format": "{capacity}% | {health}% | {time}"
+    },
+    "custom/separator": {
+      "format": "|"
+    },
+    "pulseaudio": {
+      "format": "",
+      "format-muted": "",
+      "tooltip": true,
+      "tooltip-format": "{volume}% | {source_volume}",
+      "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+      "on-click-right": "pavucontrol",
+      "scroll-step": 1
+    },
+    "clock": {
+      "format": "{:%b %d · %R}",
+      "tooltip": false
+    },
+    "bluetooth": {
+      "format": "DEFAULT",
+      "format-disabled": "󰂲",
+      "format-on": "󰂯",
+      "format-off": "OFF",
+      "format-no-controller": "NO CON",
+      "on-click": "blueman-manager"
+    },
+    "privacy": {
+    	"icon-spacing": 6,
+    	"icon-size": 18,
+    	"transition-duration": 250,
+    	"modules": [
+    		{
+    			"type": "screenshare",
+    			"tooltip": true,
+    			"tooltip-icon-size": 24
+    		},
+    		{
+    			"type": "audio-out",
+    			"tooltip": true,
+    			"tooltip-icon-size": 24
+    		},
+    		{
+    			"type": "audio-in",
+    			"tooltip": true,
+    			"tooltip-icon-size": 24
+    		},
+    		{
+    			"type": "location",
+    			"icon-name": "location-services-active-symbolic"
+    		}
+    	],
+    },
+    "network": {
+      "format-wifi": "{icon}",
+      "format-ethernet": "{icon}",
+      "format-disconnect": "{icon}",
+      "format-icons": {
+        "wifi": [
+          "󰤯",
+          "󰤟",
+          "󰤢",
+          "󰤥",
+          "󰤨"
+        ],
+        "ethernet": "",
+        "disconneted": ""
+      },
+      "tooltip-format-wifi": "{essid} UP {bandwidthUpBytes} DOWN {bandwidthDownBytes} {frequency}GHz",
+      "tooltip-format-ethernet": "{ipaddr} UP {bandwidthUpBytes} DOWN {bandwidthDownBytes} {frequency}GHz",
+      "tooltip-format-disconnected": "DISCONNECTED",
+      "on-click": "kitty nmtui"
+    }
+  },
+  {
+    "layer": "top",
+    "position": "bottom",
+    "width": 2,
+    "margin-bottom": 4,
+    "modules-center": [
+      "image#os-logo",
+      "wlr/taskbar"
+    ],
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "justify": "center",
+      "icon-size": 32,
+      "sort-by-app-id": true,
+      "on-click": "activate",
+      "on-click-middle": "close",
+      "all-outputs": true
+    },
+    "image#os-logo": {
+      "path": "/home/komidan/.config/waybar/assets/debian.svg",
+      "size": 32,
+      "tooltip": true,
+      "tooltip-format": "Application Launcher",
+      "on-click": "fuzzel"
+    }
+  }
+]
