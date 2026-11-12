@@ -17,7 +17,7 @@ $character"""
 [directory]
 format = '[$path](fg:purple1)[$readonly](fg:red0) '
 truncation_length = 3
-truncation_symbol = '… /'
+truncation_symbol = '…/'
 home_symbol = '~'
 
 [python]
