@@ -31,14 +31,22 @@ window#waybar {
   color: @fg0;
 }
 
-.modules-left, .modules-center, .modules-right {
-  padding-left: 3px;
-  padding-right: 3px;
+window#waybar.master .modules-left {
+  margin-left: 6px;
+  /* margin: 8px 12px 0 12px; */
+}
+
+window#waybar.master .modules-right {
+  margin-right: 6px;
+  /* margin: 8px 12px 0 12px; */
+}
+
+window#waybar.dock {
+  background: @bg0;
 }
 
 /* Launcher and taskbar */
-#image.os-logo,
-#taskbar button {
+window#waybar.dock #image.os-logo, #taskbar button {
   background: @bg0;
   color: @fg1;
   min-width: 32px;
@@ -50,12 +58,11 @@ window#waybar {
   box-shadow: none;
 }
 
-#image.os-logo:hover,
-#taskbar button:hover {
+window#waybar.dock #image.os-logo:hover, #taskbar button:hover {
   background: @bg3;
 }
 
-#taskbar button.active {
+window#waybar.dock #taskbar button.active {
   background: @bg2;
 }
 
@@ -63,16 +70,16 @@ window#waybar {
 #workspaces {
   border: none;
   border-radius: 0;
-  padding: 0px;
   margin: 0;
+  padding: 0px;
 }
 
 #workspaces button {
-  min-width: 0;
-  min-height: 0;
   background: @bg0;
   margin: 0;
-  padding: 0 4px;
+  min-height: 0;
+  min-width: 0;
+  padding: 0 8px;
 }
 
 #workspaces button.urgent {
@@ -108,9 +115,4 @@ window#waybar {
 #bluetooth,
 #network {
   padding: 0 6px;
-}
-
-/* Separator */
-#custom-separator {
-  color: @fg3;
 }

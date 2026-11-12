@@ -1,5 +1,6 @@
 [
   {
+    "name": "master",
     "height": 32,
     "spacing": 2,
     "modules-left": [
@@ -10,7 +11,6 @@
       "clock"
     ],
     "modules-right": [
-      "privacy",
       "battery",
       "pulseaudio",
       "bluetooth",
@@ -18,7 +18,7 @@
     ],
     "sway/workspaces": {
       "disable-scroll": true,
-      "format": "{icon}",
+      "format": "{icon}"
     },
     "battery": {
       "interval": 30,
@@ -36,9 +36,6 @@
         ""
       ],
       "tooltip-format": "{capacity}% | {health}% | {time}"
-    },
-    "custom/separator": {
-      "format": "|"
     },
     "pulseaudio": {
       "format": "",
@@ -60,32 +57,6 @@
       "format-off": "OFF",
       "format-no-controller": "NO CON",
       "on-click": "blueman-manager"
-    },
-    "privacy": {
-    	"icon-spacing": 6,
-    	"icon-size": 18,
-    	"transition-duration": 250,
-    	"modules": [
-    		{
-    			"type": "screenshare",
-    			"tooltip": true,
-    			"tooltip-icon-size": 24
-    		},
-    		{
-    			"type": "audio-out",
-    			"tooltip": true,
-    			"tooltip-icon-size": 24
-    		},
-    		{
-    			"type": "audio-in",
-    			"tooltip": true,
-    			"tooltip-icon-size": 24
-    		},
-    		{
-    			"type": "location",
-    			"icon-name": "location-services-active-symbolic"
-    		}
-    	],
     },
     "network": {
       "format-wifi": "{icon}",
@@ -109,6 +80,7 @@
     }
   },
   {
+    "name": "dock",
     "layer": "top",
     "position": "bottom",
     "width": 2,
@@ -127,7 +99,7 @@
       "all-outputs": true
     },
     "image#os-logo": {
-      "path": "/home/komidan/.config/waybar/assets/debian.svg",
+      "path": "/home/komidan/.local/share/icons/Gruvbox-Plus-Dark/apps/24/debian.svg",
       "size": 32,
       "tooltip": true,
       "tooltip-format": "Application Launcher",
